@@ -23,7 +23,7 @@ const PostList = () => {
 
   const filterdPosts =
     search.length > 0
-      ? posts.filter((post) => post.title.includes(search))
+      ? posts.filter((post) => post.title.toLocaleLowerCase().includes(search.toLocaleLowerCase().trim()))
       : posts;
 
   const deletePost = async (id: number) => {
