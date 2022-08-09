@@ -20,15 +20,18 @@ import { api } from "../../api/server";
 import { AuthContext } from "../../context/AuthContext";
 
 const ModalEditPost = () => {
-  const { isOpenEdit, onCloseEdit, setPosts, posts, user, postEdit } =
-    useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const { isOpenEdit, onCloseEdit, setPosts, posts, user, postEdit } =
+    useContext(AuthContext);
   const toast = useToast();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const { token } = parseCookies();
+    if (!title) setTitle(postEdit.title);
+    if (!content) setContent(postEdit.content);
+
     try {
       await api.put(
         `/posts/edit/${postEdit.id}`,
@@ -43,6 +46,7 @@ const ModalEditPost = () => {
       const newPosts = [{ title, content, authorId: user.id }, ...posts];
       setPosts(newPosts);
       onCloseEdit();
+      document.location.reload();
       toast({
         title: "Sucesso",
         description: "Publicação editada com sucesso!",
@@ -70,10 +74,14 @@ const ModalEditPost = () => {
               <FormLabel>Título</FormLabel>
               <Input
                 defaultValue={postEdit.title}
-                onChange={({ target }: any) => setTitle(target.value)}
+                onChange={({ target }: any) => {
+                  title?.length > 0
+                    ? setTitle(target.value)
+                    : setTitle(postEdit.title);
+                }}
                 placeholder="Qual o tema?"
               />
-              {title.length > 20 && (
+              {postEdit.title?.length > 20 && (
                 <p>Título muito longo, o limite é de 20 caracteres.</p>
               )}
             </FormControl>
@@ -82,17 +90,22 @@ const ModalEditPost = () => {
               <FormLabel>Conteúdo</FormLabel>
               <Textarea
                 defaultValue={postEdit.content}
-                onChange={({ target }: any) => setContent(target.value)}
+                onChange={({ target }: any) => {
+                  content?.length > 0
+                    ? setContent(target.value)
+                    : setContent(postEdit.content);
+                }}
                 placeholder="O que está pensando?"
               />
               <Text color="gray">
-                Quantidade de caracteres: {content.length} / 255
+                Quantidade de caracteres: {postEdit.content?.length} / 255
               </Text>
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
             <Button
+              type="submit"
               onClick={(e: any) => handleSubmit(e)}
               colorScheme="green"
               mr={3}
