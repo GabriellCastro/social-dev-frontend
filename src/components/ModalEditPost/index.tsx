@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   Textarea,
   useToast,
 } from "@chakra-ui/react";
@@ -84,13 +85,9 @@ const ModalEditPost = () => {
                 onChange={({ target }: any) => setContent(target.value)}
                 placeholder="O que está pensando?"
               />
-              {content.length > 255 && (
-                <p>
-                  Você excedeu o limite de 255 caracteres permitido.
-                  <br />
-                  <strong>{content.length}</strong> caracteres
-                </p>
-              )}
+              <Text color="gray">
+                Quantidade de caracteres: {content.length} / 255
+              </Text>
             </FormControl>
           </ModalBody>
 

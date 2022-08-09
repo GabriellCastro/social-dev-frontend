@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   Textarea,
   useToast,
 } from "@chakra-ui/react";
@@ -23,8 +24,6 @@ const ModalCreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const toast = useToast();
-
-  const createdAt = new Date().toLocaleString();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -40,10 +39,7 @@ const ModalCreatePost = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      const newPosts = [
-        { title, content, createdAt, authorId: user.id },
-        ...posts,
-      ];
+      const newPosts = [{ title, content, authorId: user.id }, ...posts];
       setPosts(newPosts);
       toast({
         title: "Sucesso",
@@ -76,7 +72,7 @@ const ModalCreatePost = () => {
                 placeholder="Qual o tema?"
               />
               {title.length > 20 && (
-                <p>Título muito longo, o limite é de 20 caracteres.</p>
+                <Text>Título muito longo, o limite é de 20 caracteres.</Text>
               )}
             </FormControl>
 
@@ -86,13 +82,9 @@ const ModalCreatePost = () => {
                 onChange={({ target }: any) => setContent(target.value)}
                 placeholder="O que está pensando?"
               />
-              {content.length > 255 && (
-                <p>
-                  Você excedeu o limite de 255 caracteres permitido.
-                  <br />
-                  <strong>{content.length}</strong> caracteres
-                </p>
-              )}
+              <Text color="gray">
+                Quantidade de caracteres: {content.length} / 255
+              </Text>
             </FormControl>
           </ModalBody>
 
