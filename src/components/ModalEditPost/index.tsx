@@ -72,6 +72,9 @@ const ModalEditPost = () => {
                 onChange={({ target }: any) => setTitle(target.value)}
                 placeholder="Qual o tema?"
               />
+              {title.length > 20 && (
+                <p>Título muito longo, o limite é de 20 caracteres.</p>
+              )}
             </FormControl>
 
             <FormControl mt={4}>
@@ -81,6 +84,13 @@ const ModalEditPost = () => {
                 onChange={({ target }: any) => setContent(target.value)}
                 placeholder="O que está pensando?"
               />
+              {content.length > 255 && (
+                <p>
+                  Você excedeu o limite de 255 caracteres permitido.
+                  <br />
+                  <strong>{content.length}</strong> caracteres
+                </p>
+              )}
             </FormControl>
           </ModalBody>
 
