@@ -26,6 +26,9 @@ interface IAuthContext {
   setPostEdit: (postEdit: any) => void;
   search: string;
   setSearch: (search: string) => void;
+  isOpenEdit: boolean;
+  onOpenEdit: () => void;
+  onCloseEdit: () => void;
 }
 
 interface IAuthProvider {
@@ -45,6 +48,11 @@ export const AuthProvider: FC<IAuthProvider> = ({ children }) => {
   const [user, setUser] = useState({} as IUser);
   const [posts, setPosts] = useState([] as Post[]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenEdit,
+    onOpen: onOpenEdit,
+    onClose: onCloseEdit,
+  } = useDisclosure();
   const [postEdit, setPostEdit] = useState({} as Post);
   const [search, setSearch] = useState("");
 
@@ -82,6 +90,9 @@ export const AuthProvider: FC<IAuthProvider> = ({ children }) => {
         setPostEdit,
         search,
         setSearch,
+        isOpenEdit,
+        onOpenEdit,
+        onCloseEdit,
       }}
     >
       {children}

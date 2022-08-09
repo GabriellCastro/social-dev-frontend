@@ -17,13 +17,17 @@ import { AuthContext } from "../../context/AuthContext";
 
 const PostList = () => {
   const { token } = parseCookies();
-  const { posts, setPosts, user, setPostEdit, onOpen, search } =
+  const { posts, setPosts, user, setPostEdit, onOpenEdit, search } =
     useContext(AuthContext);
   const toast = useToast();
 
   const filterdPosts =
     search.length > 0
-      ? posts.filter((post) => post.title.toLocaleLowerCase().includes(search.toLocaleLowerCase().trim()))
+      ? posts.filter((post) =>
+          post.title
+            .toLocaleLowerCase()
+            .includes(search.toLocaleLowerCase().trim())
+        )
       : posts;
 
   const deletePost = async (id: number) => {
@@ -111,7 +115,7 @@ const PostList = () => {
                   <Button
                     onClick={() => {
                       setPostEdit(post);
-                      onOpen();
+                      onOpenEdit();
                     }}
                     color={"blue"}
                     variant={"solid"}

@@ -19,7 +19,7 @@ import { api } from "../../api/server";
 import { AuthContext } from "../../context/AuthContext";
 
 const ModalEditPost = () => {
-  const { isOpen, onClose, setPosts, posts, user, postEdit } =
+  const { isOpenEdit, onCloseEdit, setPosts, posts, user, postEdit } =
     useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -41,7 +41,7 @@ const ModalEditPost = () => {
       );
       const newPosts = [{ title, content, authorId: user.id }, ...posts];
       setPosts(newPosts);
-      onClose();
+      onCloseEdit();
       toast({
         title: "Sucesso",
         description: "Publicação editada com sucesso!",
@@ -59,7 +59,7 @@ const ModalEditPost = () => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpenEdit} onClose={onCloseEdit}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Criar uma publicação</ModalHeader>
@@ -92,7 +92,7 @@ const ModalEditPost = () => {
             >
               Salvar
             </Button>
-            <Button onClick={onClose}>Cancelar</Button>
+            <Button onClick={onCloseEdit}>Cancelar</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
