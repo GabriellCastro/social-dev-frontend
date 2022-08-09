@@ -73,7 +73,6 @@ const PostList = () => {
           <Box
             maxW={"800px"}
             w={"full"}
-            bg={"gray.900"}
             boxShadow={"2xl"}
             rounded={"md"}
             p={6}
@@ -89,10 +88,10 @@ const PostList = () => {
               >
                 Tech
               </Text>
-              <Heading color={"gray.700"} fontSize={"2xl"} fontFamily={"body"}>
+              <Heading fontSize={"2xl"} fontFamily={"body"}>
                 {post.title}
               </Heading>
-              <Text color={"gray.500"}>{post.content}</Text>
+              <Text>{post.content}</Text>
             </Stack>
             <Stack
               display="flex"
@@ -105,9 +104,7 @@ const PostList = () => {
               <Box textAlign="center">
                 <Avatar src="https://itp.live/public/styles/full_img/public/images/2021/10/31/nftmonkey_3.png?Hv9WK--v" />
                 <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-                  <Text color={"gray.500"}>
-                    {moment(post.createdAt, "YYYYMMDD").fromNow()}
-                  </Text>
+                  <Text>{moment(post.createdAt, "YYYYMMDD").fromNow()}</Text>
                 </Stack>
               </Box>
               {user.id === post.authorId && (
