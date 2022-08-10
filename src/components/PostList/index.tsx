@@ -114,7 +114,7 @@ const PostList = () => {
                       setPostEdit(post);
                       onOpenEdit();
                     }}
-                    color={"blue"}
+                    
                     variant={"solid"}
                   >
                     <AiFillEdit />

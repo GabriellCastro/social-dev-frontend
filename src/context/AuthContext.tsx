@@ -1,4 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { destroyCookie, parseCookies } from "nookies";
 import { createContext, FC, ReactNode, useEffect, useState } from "react";
 import { api } from "../api/server";
@@ -29,6 +30,7 @@ interface IAuthContext {
   isOpenEdit: boolean;
   onOpenEdit: () => void;
   onCloseEdit: () => void;
+  loggout: () => void;
 }
 
 interface IAuthProvider {
@@ -55,6 +57,7 @@ export const AuthProvider: FC<IAuthProvider> = ({ children }) => {
   } = useDisclosure();
   const [postEdit, setPostEdit] = useState({} as Post);
   const [search, setSearch] = useState("");
+  const { push } = useRouter();
 
   useEffect(() => {
     const getUser = async () => {
@@ -76,6 +79,12 @@ export const AuthProvider: FC<IAuthProvider> = ({ children }) => {
     getUser();
   }, []);
 
+  const loggout = async () => {
+    destroyCookie(null, "token");
+    setUser({} as IUser);
+    push("/login");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -93,6 +102,7 @@ export const AuthProvider: FC<IAuthProvider> = ({ children }) => {
         isOpenEdit,
         onOpenEdit,
         onCloseEdit,
+        loggout,
       }}
     >
       {children}

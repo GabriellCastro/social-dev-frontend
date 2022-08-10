@@ -8,15 +8,15 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { useContext } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlinePlus } from "react-icons/ai";
 import { AuthContext } from "../../context/AuthContext";
 
 const Header = () => {
-  const { onOpen, setSearch } = useContext(AuthContext);
+  const { onOpen, setSearch, loggout } = useContext(AuthContext);
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box as="header" py={4} px="6">
+    <Box as="header" shadow="md" py={4} px="6">
       <Box maxW="1400px" mx="auto">
         <Flex
           alignItems="center"
@@ -37,9 +37,6 @@ const Header = () => {
             onChange={(e: any) => setSearch(e.target.value)}
           />
           <Button
-            color="gray.500"
-            bg="transparent"
-            border="1px"
             borderColor="gray.200"
             _hover={{
               bg: "green.500",
@@ -58,8 +55,21 @@ const Header = () => {
             name="John Doe"
             src="https://itp.live/public/styles/full_img/public/images/2021/10/31/nftmonkey_3.png?Hv9WK--v"
             size="md"
+            cursor="pointer"
+            onClick={() => loggout()}
           >
-            <AvatarBadge boxSize="1.25em" bg="green.500" />
+            <AvatarBadge
+              borderRadius="full"
+              bg="red.500"
+              color="white"
+              px="0.2rem"
+              py="1"
+              fontWeight="semibold"
+              right="-5px"
+              
+            >
+              <AiOutlineLogout />
+            </AvatarBadge>
           </Avatar>
         </Flex>
       </Box>
