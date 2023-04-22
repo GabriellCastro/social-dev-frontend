@@ -7,18 +7,20 @@ import ModalCreatePost from "../components/ModalCreatePost";
 import ModalEditPost from "../components/ModalEditPost";
 import PostList from "../components/PostList";
 import { redirectLogin } from "../utils/redirectLogin";
+import { Search } from "../components/Search";
 
 const Home: NextPage = () => {
   return (
     <>
       <Header />
       <Container
-        maxW="1400px"
+        maxW="1000px"
         px="6"
         display="flex"
         flexDirection="column"
         minH="100vh"
       >
+        <Search />
         <ModalCreatePost />
         <ModalEditPost />
         <PostList />

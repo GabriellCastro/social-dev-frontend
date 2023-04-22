@@ -20,6 +20,7 @@ const PostList = () => {
   const { posts, setPosts, user, setPostEdit, onOpenEdit, search } =
     useContext(AuthContext);
   const toast = useToast();
+  console.log(posts);
 
   const filterdPosts =
     search.length > 0
@@ -114,7 +115,6 @@ const PostList = () => {
                       setPostEdit(post);
                       onOpenEdit();
                     }}
-                    
                     variant={"solid"}
                   >
                     <AiFillEdit />
