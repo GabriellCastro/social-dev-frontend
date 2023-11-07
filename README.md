@@ -1,5 +1,5 @@
 <h1 align="center">Social Dev - Rede social Tech [FRONTEND]</h1>
-<p align="center">Desafio proposto foi desenvolver uma rede social para desenvolvedores, contendo back-end, front-end e banco de dados.</p>
+<p align="center">O resultado final do projeto é uma rede social voltada para desenvolvedores, com uma interface de usuário atraente e responsiva, funcionalidades de interação entre usuários e um sistema de armazenamento de dados eficiente no banco de dados. Essas tecnologias e ferramentas escolhidas contribuíram para o desenvolvimento de uma aplicação de alta qualidade e desempenho, atendendo às necessidades da comunidade de desenvolvedores.</p>
 
 <a href="https://social-dev-app.vercel.app/">Deploy Aqui!</a>
 
